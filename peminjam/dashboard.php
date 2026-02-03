@@ -51,6 +51,45 @@ $total_denda = $conn->query("SELECT SUM(denda) as total FROM peminjaman WHERE us
                 <p>Rp<?php echo number_format($total_denda, 0,',','.'); ?></p>
             </div>
         </div>
-    </div>
-</body>
-</html>
+
+        <div class="card">
+            <h3>Peminjaman Aktif Anda</h3>
+            <?php 
+            $pinjaman = $conn->query("
+                SELECT p.*, a.nama_alat
+                FROM peminjaman p
+                JOIN alat a ON p.alat_id = a.id
+                WHERE p.user_id = $user_id
+                AND p.status = 'disetujui'
+                AND p.tanggal_kembali IS NULL
+                ORDER BY p.tanggal_pinjam DESC
+            ");
+
+            if ($pinjaman->num_rows > 0): ?>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Alat</th>
+                            <th>Jumlah</th>
+                            <th>Tanggal Pinjam</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while($row = $pinjaman->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo $row['nama_alat']; ?></td>
+                                <td><?php echo $row['jumlah']; ?></td>
+                                <td><?php echo formatDate($row['tanggal_pinjam']); ?></td>
+                                <td><span class="badge badge-success">Aktif</span></td>
+                            </tr>
+                            <?php endwhile; ?>
+                    </tbody>
+                </table>
+                <?php else: ?>
+                <p>Anda tidak memiliki peminjaman aktif.</p>
+                <?php endif; ?>
+            </div>
+        </div>
+    </body>
+    </html>
