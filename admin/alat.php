@@ -28,7 +28,7 @@ if (isset($_GET['hapus'])) {
     header('Location: alat.php?success=1');
 }
 
-$alat = $conn->query("SELECT a.*, k.nama_kategori FROM alat a LEFT JOIN k ON a.kategori_id = k.id");
+$alat = $conn->query("SELECT a.*, k.nama_kategori FROM alat a LEFT JOIN kategori k ON a.kategori_id = k.id");
 $kategori = $conn->query("SELECT * FROM kategori");
 ?>
 

@@ -1,4 +1,4 @@
-<!-- <?
+<?php
 session_start();
 
 include'../includes/config.php';
@@ -9,14 +9,12 @@ checkAuth('peminjam');
 
 $user_id = $_SESSION['user_id'];
 
-$total_pinjaman = $conn->query("SELECT COUNT(*) as total FROM peminjaman WHERE user_id = $user_id")-
->fetch_assoc()['total'];
+$total_pinjaman = $conn->query("SELECT COUNT(*) as total FROM peminjaman WHERE user_id = $user_id")->fetch_assoc()['total'];
 
 $pinjaman_aktif = $conn->query("SELECT COUNT(*) as total FROM peminjaman WHERE user_id = $user_id 
 AND status = 'disetujui' AND tanggal_kembali IS NULL")->fetch_assoc()['total'];
 
-$total_denda = $conn->query("SELECT SUM(denda) as total FROM peminjaman WHERE user_id = $user_id")-
->fetch_assoc()['total'];
+$total_denda = $conn->query("SELECT SUM(denda) as total FROM peminjaman WHERE user_id = $user_id")->fetch_assoc()['total'];
 ?>
 
 <!DOCTYPE html>
@@ -92,4 +90,4 @@ $total_denda = $conn->query("SELECT SUM(denda) as total FROM peminjaman WHERE us
             </div>
         </div>
     </body>
-    </html> -->
+    </html>

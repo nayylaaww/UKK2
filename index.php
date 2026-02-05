@@ -418,7 +418,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'])) {
                 </div>
 
                 <div class="footer">
-                    <p> © 2026 Ujian Kompetensi Keahlian (UKK)</p>
+                    <p> ©  2026 Ujian Kompetensi Keahlian (UKK)</p>
                     <p>Rekayasa Perangkat Lunak</p>
                 </div>
             </div>

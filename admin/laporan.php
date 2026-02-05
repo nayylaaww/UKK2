@@ -22,7 +22,7 @@ $stmt->bind_param("ss", $start_date, $end_date);
 $stmt->execute();
 $peminjaman = $stmt->get_result();
 
-$total_peminjaman = $conn->query("SELECT COUNT(*) FROM peminjaman WHERE tanggal_pinjam
+$total_peminjaman = $conn->query("SELECT COUNT(*) as total FROM peminjaman WHERE tanggal_pinjam
 BETWEEN '$start_date' AND '$end_date'")->fetch_assoc()['total'];
 
 $total_denda = $conn->query("SELECT SUM(denda) as total FROM peminjaman WHERE tanggal_pinjam
@@ -80,7 +80,7 @@ $alat_terpopuler = $conn->query("
             </div>
             <div class="stat-card">
                 <h3>Total Deda</h3>
-                <p><?php echo $number_format($total_denda, 0,',','.'); ?></p>
+                <p><?php echo number_format($total_denda, 0,',','.'); ?></p>
             </div>
         </div>
 
